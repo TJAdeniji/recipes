@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome {{session['first_name']}}</h1>
+    <a href='/dashboard'>Dashboard</a>
+    <a href="/logout">Logout</a>
+
+    <h1>Edit Recipe</h1>
+
+    <form action="/update/{{recipe.id}}", method="POST">
+        <label for="name">Name:</label>
+        <input type='text' name="name" value="{{recipe.name}}"><br>
+        <label for="description">Description:</label>
+        <textarea name="description" cols="30" rows="10" >{{recipe.description}}</textarea><br>
+        
+        <label for='under_30'>Under 30 Minutes?</label>
+        {% if recipe.under_thirty == "Yes" %} 
+        <label for='yes'>Yes:</label>
+        <input type="radio" name="under_thirty" value="Yes" checked>
+        <label for='yes'>No:</label>
+        <input type="radio" name="under_thirty" value="No"><br>
+        {% elif recipe.under_thirty == "No" %}
+        <label for='yes'>Yes:</label>
+        <input type="radio" name="under_thirty" value="Yes" >
+        <label for='yes'>No:</label>
+        <input type="radio" name="under_thirty" value="No" checked><br>
+        {% endif %}
+
+        <label for="instructions">Instructions:</label>
+        <textarea name="instructions" cols="30" rows="10">{{recipe.instructions}}</textarea><br>
+        <label for="date_created">Date Made On:</label>
+        <input type="date" name="date_created" value="{{recipe.date_created}}"><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
